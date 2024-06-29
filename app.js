@@ -4,24 +4,21 @@ const fs = require("fs");
 const PORT = 5000;
 
 const server = http.createServer((req, res) => {
+  if(req.url === "/") res.end("Home Page");
+  else if(req.url === "/about") {
+    //BLCOKING CODE!!!
+    for (let i = 0; i < 500; i++) {
+      for (let j = 0; j < 500; j++) {
+        console.log(`${i} ${j}`)
+        
+      }
+      
+    }
+    res.end("About Us")
+  }
+  else res.end("Error!")
+});
 
-    // const text = fs.readFileSync("./content/big.txt", "utf8");
-    // res.end(text);
-
-    const streamText = fs.createReadStream("./content/big.txt", "utf8");
-    
-    streamText.on("open", () => {
-        streamText.pipe(res)
-    })
-
-    streamText.on("error", (err) => {
-        console.error(err);
-        res.end(err);
-    })
-
-
-})
-
-server.listen(PORT,  () => {
-    console.log(`Server is listening on port ${PORT}`)
+server.listen(5000, () => {
+  console.log('Server listening on port : 5000....');
 });
